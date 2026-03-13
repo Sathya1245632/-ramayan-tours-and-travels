@@ -48,11 +48,11 @@ export default function Navbar() {
                                 className="object-cover scale-110"
                             />
                         </div>
-                        <div className="hidden sm:block">
-                            <div className="text-white font-bold text-xl leading-none font-poppins tracking-tight group-hover:text-orange-400 transition-colors">
+                            <div className="flex flex-col">
+                            <div className="text-white font-bold text-lg sm:text-xl leading-none font-poppins tracking-tight group-hover:text-orange-400 transition-colors">
                                 Ramayan
                             </div>
-                            <div className="text-orange-400 text-[10px] font-bold tracking-[0.2em] mt-1 opacity-80 group-hover:opacity-100 transition-opacity">
+                            <div className="text-orange-400 text-[8px] sm:text-[10px] font-bold tracking-[0.2em] mt-1 opacity-80 group-hover:opacity-100 transition-opacity">
                                 TOURS & TRAVELS
                             </div>
                         </div>

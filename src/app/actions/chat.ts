@@ -64,3 +64,53 @@ export async function chat(message: string, history: { role: 'user' | 'model'; p
         return { success: false, error: 'AI Error', text: "Forgive me, I encountered a small spiritual block. Please try again or WhatsApp us directly! 🙏" };
     }
 }
+
+export async function generateAIItinerary(destination: string, days: number, budget: string, style: string) {
+    try {
+        if (!process.env.GEMINI_API_KEY) {
+            throw new Error('API Key missing');
+        }
+
+        const model = genAI.getGenerativeModel({ 
+            model: 'gemini-1.5-flash',
+            generationConfig: { responseMimeType: "application/json" }
+        });
+
+        const prompt = `
+            You are the "AI Trip Planner" for Ramayan Tours and Travels.
+            Generate a detailed, spiritual pilgrimage itinerary for ${destination} for ${days} days.
+            Budget level: ${budget} (${style}).
+
+            The response must be a JSON object with this exact structure:
+            {
+                "destination": "${destination}",
+                "days": ${days},
+                "budget": "${style}",
+                "totalCost": number,
+                "itinerary": [
+                    {
+                        "day": number,
+                        "title": "string",
+                        "activities": ["string", "string"],
+                        "temple": "string (main temple visit for the day)",
+                        "hotel": "string (recommended hotel name based on budget)",
+                        "tip": "string (a helpful travel tip)"
+                    }
+                ],
+                "hotels": ["string", "string"],
+                "transport": "string (recommended transport for this budget)",
+                "highlights": ["string", "string"]
+            }
+
+            Make sure the itinerary is culturally accurate, spiritually fulfilling, and mentions specific places in ${destination}.
+            Incorporate Ramayan Tours branding if appropriate.
+        `;
+
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        return JSON.parse(response.text());
+    } catch (error) {
+        console.error('AI Planner Error:', error);
+        return null;
+    }
+}

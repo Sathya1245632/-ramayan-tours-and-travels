@@ -115,6 +115,8 @@ function generateItinerary(destination: string, days: number, budget: string, st
     return { ...mock, destination, days, budget: style, totalCost };
 }
 
+import { generateAIItinerary } from '@/app/actions/chat';
+
 export default function AIPlannerPage() {
     const [formData, setFormData] = useState({
         destination: '',
@@ -139,14 +141,33 @@ export default function AIPlannerPage() {
         setLoading(true);
         setStep(0);
 
-        for (let i = 0; i < loadingSteps.length; i++) {
-            await new Promise((r) => setTimeout(r, 600));
-            setStep(i + 1);
-        }
+        // Simulated progress steps for better UX
+        const totalSteps = loadingSteps.length;
+        const stepInterval = 1000; // 1 second per step
 
-        await new Promise((r) => setTimeout(r, 400));
-        setItinerary(generateItinerary(formData.destination, formData.days, formData.budget, formData.style));
-        setLoading(false);
+        const progressInterval = setInterval(() => {
+            setStep((s) => (s < totalSteps ? s + 1 : s));
+        }, stepInterval);
+
+        try {
+            const result = await generateAIItinerary(
+                formData.destination,
+                formData.days,
+                formData.budget,
+                formData.style
+            );
+
+            if (result) {
+                setItinerary(result);
+            } else {
+                alert("Failed to generate itinerary. Please try again! 🙏");
+            }
+        } catch (error) {
+            console.error(error);
+        } finally {
+            clearInterval(progressInterval);
+            setLoading(false);
+        }
     };
 
     return (

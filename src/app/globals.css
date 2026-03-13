@@ -292,52 +292,35 @@ body {
   border-radius: 8px;
 }
 
-/* Premium Whatsapp Booking Pill */
+/* Standard Floating Bubbles */
 .whatsapp-fab {
   position: fixed;
   bottom: 90px;
   right: 24px;
   z-index: 1000;
-  background: linear-gradient(135deg, #25D366, #128C7E);
-  border-radius: 50px;
-  padding: 0 20px;
-  height: 52px;
+  background: #25D366;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
   display: flex;
   align-items: center;
-  gap: 12px;
-  box-shadow: 0 8px 32px rgba(37, 211, 102, 0.4);
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
   text-decoration: none;
-  animation: sacred-pulse 3s infinite;
 }
 
 .whatsapp-fab:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 12px 40px rgba(37, 211, 102, 0.6);
-  background: linear-gradient(135deg, #28E070, #128C7E);
+  transform: scale(1.1);
+  box-shadow: 0 6px 30px rgba(37, 211, 102, 0.5);
 }
 
-.whatsapp-label {
-  color: white;
-  font-weight: 700;
-  font-size: 14px;
-  white-space: nowrap;
-}
-
-@keyframes sacred-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.4); }
-  70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
-}
-
-/* Chat FAB */
 .chat-fab {
   position: fixed;
   bottom: 24px;
   right: 24px;
-  z-index: 999;
+  z-index: 1000;
   background: linear-gradient(135deg, #FF7A00, #D4AF37);
   border-radius: 50%;
   width: 56px;
@@ -345,12 +328,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 20px rgba(255, 122, 0, 0.5);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   transition: all 0.3s ease;
+  border: none;
 }
 
 .chat-fab:hover {
   transform: scale(1.1);
-  box-shadow: 0 6px 30px rgba(255, 122, 0, 0.7);
+  box-shadow: 0 6px 30px rgba(255, 122, 0, 0.5);
 }

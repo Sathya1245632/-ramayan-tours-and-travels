@@ -44,7 +44,7 @@ export async function chat(message: string, history: { role: 'user' | 'model'; p
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
         const chatSession = model.startChat({
             history: [
@@ -77,8 +77,8 @@ export async function generateAIItinerary(destination: string, days: number, bud
 
         const genAI = new GoogleGenerativeAI(apiKey);
         
-        // Try multiple model aliases in case of 404
-        const modelNames = ['gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-pro'];
+        // Use verified models from diagnostic list
+        const modelNames = ['gemini-2.0-flash', 'gemini-2.5-flash', 'gemini-pro'];
         let lastError = null;
 
         for (const modelName of modelNames) {

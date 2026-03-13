@@ -8,6 +8,7 @@ import { Menu, X, Phone, ChevronDown } from 'lucide-react';
 
 const navLinks = [
     { href: '/', label: 'Home' },
+    { href: '/tours/rameshwaram', label: 'Rameshwaram Special' },
     { href: '/destinations', label: 'Destinations' },
     { href: '/packages', label: 'Packages' },
     { href: '/ai-planner', label: '✨ AI Planner' },

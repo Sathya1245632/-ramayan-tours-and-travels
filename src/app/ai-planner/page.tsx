@@ -160,10 +160,11 @@ export default function AIPlannerPage() {
             if (result) {
                 setItinerary(result);
             } else {
-                alert("Failed to generate itinerary. Please try again! 🙏");
+                alert("The AI had a temporary spiritual block. Please ensure your Gemini API Key is correctly set in Vercel and try again! 🙏");
             }
         } catch (error) {
             console.error(error);
+            alert("Connection error. Please check your internet or Vercel logs. 🙏");
         } finally {
             clearInterval(progressInterval);
             setLoading(false);

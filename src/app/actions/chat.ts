@@ -43,7 +43,7 @@ export async function chat(message: string, history: { role: 'user' | 'model'; p
             };
         }
 
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
+        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
 
         const chatSession = model.startChat({
             history: [
@@ -72,7 +72,7 @@ export async function generateAIItinerary(destination: string, days: number, bud
         }
 
         const model = genAI.getGenerativeModel({ 
-            model: 'gemini-1.5-flash',
+            model: 'gemini-1.5-flash-latest',
             generationConfig: { responseMimeType: "application/json" }
         });
 

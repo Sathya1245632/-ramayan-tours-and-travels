@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { PrismaClient } from '@prisma/client';
 import { destinations, packages, reviews } from '../src/lib/data';
 
@@ -18,7 +19,7 @@ async function main() {
     data: {
       name: 'Admin User',
       email: 'admin@ramayantours.com',
-      password: 'admin123', // In production, use hashed passwords
+      password: 'JaiShriRam@2025', // In production, use hashed passwords
       role: 'ADMIN',
     },
   });

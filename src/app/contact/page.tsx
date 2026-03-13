@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Phone, Mail, MapPin, Clock, Send, MessageCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { sendContactMessage } from '@/app/actions/contact';
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
@@ -11,10 +12,20 @@ export default function ContactPage() {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setSending(true);
-        await new Promise((r) => setTimeout(r, 1500));
-        setSending(false);
-        toast.success('Message sent! We\'ll reply within 24 hours. 🙏');
-        setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+
+        try {
+            const result = await sendContactMessage(formData);
+            if (result.success) {
+                toast.success('Message sent! We\'ll reply within 24 hours. 🙏');
+                setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+            } else {
+                toast.error(result.error || 'Failed to send message. Please try again.');
+            }
+        } catch (error) {
+            toast.error('An unexpected error occurred.');
+        } finally {
+            setSending(false);
+        }
     };
 
     return (

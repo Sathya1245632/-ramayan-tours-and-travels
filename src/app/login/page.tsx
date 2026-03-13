@@ -6,6 +6,7 @@ import NextImage from 'next/image';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { Eye, EyeOff, Mail, Lock, User, Phone, Sparkles, ArrowRight, ShieldCheck } from 'lucide-react';
 import toast from 'react-hot-toast';
+import { login, signup } from '@/app/actions/auth';
 
 function LoginContent() {
     const searchParams = useSearchParams();
@@ -22,31 +23,29 @@ function LoginContent() {
         e.preventDefault();
         setLoading(true);
 
-        // Simulate API call
-        await new Promise((r) => setTimeout(r, 1000));
-
-        if (isAdminMode) {
-            // Simple Admin Check
-            if (formData.email === 'admin@ramayantours.com' && formData.password === 'JaiShriRam@2025') {
-                // Set cookie (primitive version)
-                document.cookie = "admin_session=true; path=/; max-age=86400; SameSite=Strict";
-                toast.success('Admin access granted! 🙏');
-                router.push(callbackUrl);
-            } else {
-                toast.error('Invalid admin credentials.');
-                setLoading(false);
-                return;
-            }
-        } else {
+        try {
             if (mode === 'login') {
-                toast.success('Welcome back! 🙏 Jai Shri Ram!');
-                router.push(callbackUrl);
+                const result = await login(formData);
+                if (result.success) {
+                    toast.success(result.isAdmin ? 'Admin access granted! 🙏' : 'Welcome back! 🙏 Jai Shri Ram!');
+                    router.push(callbackUrl);
+                } else {
+                    toast.error(result.error || 'Login failed');
+                }
             } else {
-                toast.success('Account created! Welcome to Ramayan Tours! 🕉️');
-                setMode('login');
+                const result = await signup(formData);
+                if (result.success) {
+                    toast.success('Account created! Welcome to Ramayan Tours! 🕉️');
+                    setMode('login');
+                } else {
+                    toast.error(result.error || 'Signup failed');
+                }
             }
+        } catch (error) {
+            toast.error('An unexpected error occurred');
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     };
 
     return (
@@ -97,14 +96,13 @@ function LoginContent() {
                             <div>
                                 <label className="block text-gray-400 text-sm mb-2">Full Name</label>
                                 <div className="relative">
-                                    <User className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-orange-400" />
                                     <input
                                         type="text"
                                         required
                                         value={formData.name}
                                         onChange={(e) => setFormData((p) => ({ ...p, name: e.target.value }))}
                                         placeholder="Ramesh Kumar"
-                                        className="input-sacred pl-11"
+                                        className="input-sacred"
                                     />
                                 </div>
                             </div>
@@ -112,14 +110,13 @@ function LoginContent() {
                         <div>
                             <label className="block text-gray-400 text-sm mb-2">Email Address</label>
                             <div className="relative">
-                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-orange-400" />
                                 <input
                                     type="email"
                                     required
                                     value={formData.email}
                                     onChange={(e) => setFormData((p) => ({ ...p, email: e.target.value }))}
                                     placeholder="ramesh@example.com"
-                                    className="input-sacred pl-11"
+                                    className="input-sacred"
                                 />
                             </div>
                         </div>
@@ -127,13 +124,12 @@ function LoginContent() {
                             <div>
                                 <label className="block text-gray-400 text-sm mb-2">Phone Number</label>
                                 <div className="relative">
-                                    <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-orange-400" />
                                     <input
                                         type="tel"
                                         value={formData.phone}
                                         onChange={(e) => setFormData((p) => ({ ...p, phone: e.target.value }))}
                                         placeholder="+91 98765 43210"
-                                        className="input-sacred pl-11"
+                                        className="input-sacred"
                                     />
                                 </div>
                             </div>
@@ -141,14 +137,13 @@ function LoginContent() {
                         <div>
                             <label className="block text-gray-400 text-sm mb-2">Password</label>
                             <div className="relative">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-orange-400" />
                                 <input
                                     type={showPassword ? 'text' : 'password'}
                                     required
                                     value={formData.password}
                                     onChange={(e) => setFormData((p) => ({ ...p, password: e.target.value }))}
                                     placeholder={mode === 'login' ? 'Your password' : 'Min. 8 characters'}
-                                    className="input-sacred pl-11 pr-11"
+                                    className="input-sacred pr-11"
                                 />
                                 <button
                                     type="button"

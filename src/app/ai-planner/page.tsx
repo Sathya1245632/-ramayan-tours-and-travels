@@ -182,10 +182,22 @@ export default function AIPlannerPage() {
                                 onChange={(e) => setFormData((p) => ({ ...p, destination: e.target.value }))}
                                 className="input-sacred"
                             >
-                                <option value="">Select a holy destination</option>
-                                {['Rameshwaram', 'Varanasi', 'Madurai', 'Tirupati', 'Kanyakumari', 'Puri', 'Vrindavan', 'Dwarka'].map((d) => (
-                                    <option key={d} value={d}>{d}</option>
-                                ))}
+                                <option value="">Select a destination</option>
+                                <optgroup label="Major Cities (Starting Points)">
+                                    {["Chennai", "Coimbatore", "Madurai", "Tiruchirappalli", "Salem", "Erode", "Tiruppur", "Vellore", "Tirunelveli", "Thoothukudi", "Dindigul", "Karur", "Namakkal", "Krishnagiri", "Dharmapuri"].map(d => <option key={d} value={d}>{d}</option>)}
+                                </optgroup>
+                                <optgroup label="Famous Temple Destinations">
+                                    {["Rameshwaram", "Madurai Meenakshi Temple", "Chidambaram", "Palani", "Tiruchendur", "Kanchipuram", "Srirangam", "Tiruvannamalai", "Kumbakonam", "Swamimalai", "Thanjavur Brihadeeswarar Temple", "Srivilliputhur", "Samayapuram", "Thirunallar", "Thirukadaiyur", "Oppiliappan Temple", "Alangudi Guru Temple", "Thiruvidaimarudur", "Thiruchendur Murugan Temple", "Suchindram Temple"].map(d => <option key={d} value={d}>{d}</option>)}
+                                </optgroup>
+                                <optgroup label="Hill Stations">
+                                    {["Ooty", "Kodaikanal", "Yercaud", "Valparai", "Kolli Hills", "Meghamalai", "Kotagiri", "Coonoor", "Topslip", "Yelagiri Hills"].map(d => <option key={d} value={d}>{d}</option>)}
+                                </optgroup>
+                                <optgroup label="Beach & Coastal Places">
+                                    {["Kanyakumari", "Mahabalipuram", "Dhanushkodi", "Marina Beach", "Elliots Beach", "Covelong Beach", "Nagapattinam", "Velankanni", "Poompuhar", "Tharangambadi", "Rameshwaram Beach", "Manapad Beach"].map(d => <option key={d} value={d}>{d}</option>)}
+                                </optgroup>
+                                <optgroup label="Nature & Wildlife">
+                                    {["Mudumalai National Park", "Anamalai Tiger Reserve", "Indira Gandhi Wildlife Sanctuary", "Kalakkad Mundanthurai Tiger Reserve", "Point Calimere Wildlife Sanctuary", "Gulf of Mannar Marine Park", "Sathuragiri Hills", "Sirumalai", "Kalvarayan Hills", "Pachaimalai Hills"].map(d => <option key={d} value={d}>{d}</option>)}
+                                </optgroup>
                             </select>
                         </div>
 

@@ -7,6 +7,7 @@ import { useSearchParams } from 'next/navigation';
 import { CheckCircle, CreditCard, ArrowRight, Shield, Star, Phone } from 'lucide-react';
 import { packages } from '@/lib/data';
 import toast from 'react-hot-toast';
+import { createBooking } from '@/app/actions/booking';
 
 const steps = ['Select Package', 'Traveler Details', 'Payment', 'Confirmation'];
 
@@ -43,10 +44,26 @@ function BookingContent() {
     const handlePayment = async (e: React.FormEvent) => {
         e.preventDefault();
         setIsProcessing(true);
-        await new Promise((r) => setTimeout(r, 2500));
-        setIsProcessing(false);
-        setCurrentStep(4);
-        toast.success('🎉 Booking Confirmed! Check your email.');
+
+        try {
+            const result = await createBooking({
+                pkgId: pkg.id,
+                travelers,
+                formData,
+                totalAmount
+            });
+
+            if (result.success) {
+                setCurrentStep(4);
+                toast.success('🎉 Booking Confirmed! Check your email.');
+            } else {
+                toast.error(result.error || 'Booking failed. Please try again.');
+            }
+        } catch (error) {
+            toast.error('An unexpected error occurred during payment.');
+        } finally {
+            setIsProcessing(false);
+        }
     };
 
     return (

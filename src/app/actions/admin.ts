@@ -9,8 +9,7 @@ export async function getAdminDashboardStats() {
             totalRevenue,
             activeBookingsCount,
             newCustomersCount,
-            pendingApprovalsCount,
-            monthlyRevenue
+            pendingApprovalsCount
         ] = await Promise.all([
             // Total Revenue (Confirmed bookings)
             prisma.booking.aggregate({
@@ -38,31 +37,41 @@ export async function getAdminDashboardStats() {
             prisma.booking.count({
                 where: { status: 'PENDING' }
             }),
-            // Monthly Revenue (Last 6 months)
-            // This is a simplified version; in a real app you'd group by month
-            prisma.booking.groupBy({
-                by: ['createdAt'],
-                where: { status: 'CONFIRMED' },
-                _sum: { amount: true },
-                orderBy: { createdAt: 'desc' },
-                take: 100 // Get recent confirmed bookings to aggregate manually
-            })
         ]);
+
+        // Calculate monthly revenue for last 6 months
+        const sixMonthsAgo = new Date();
+        sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 5);
+        sixMonthsAgo.setDate(1);
+
+        const realMonthlyRevenueData = await prisma.booking.findMany({
+            where: {
+                status: 'CONFIRMED',
+                createdAt: { gte: sixMonthsAgo }
+            },
+            select: {
+                amount: true,
+                createdAt: true
+            }
+        });
+
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const monthlyStats = Array.from({ length: 6 }).map((_, i) => {
+            const d = new Date();
+            d.setMonth(d.getMonth() - (5 - i));
+            const monthName = months[d.getMonth()];
+            const amount = realMonthlyRevenueData
+                .filter(b => b.createdAt.getMonth() === d.getMonth() && b.createdAt.getFullYear() === d.getFullYear())
+                .reduce((sum, b) => sum + b.amount, 0);
+            return { month: monthName, amount: amount || 0 };
+        });
 
         return {
             totalRevenue: totalRevenue._sum.amount || 0,
             activeBookings: activeBookingsCount,
             newCustomers: newCustomersCount,
             pendingApprovals: pendingApprovalsCount,
-            // We'll return mock monthly revenue for now if DB is empty, or process the real ones
-            monthlyRevenue: [
-                { month: 'Oct', amount: 285000 },
-                { month: 'Nov', amount: 342000 },
-                { month: 'Dec', amount: 520000 },
-                { month: 'Jan', amount: 398000 },
-                { month: 'Feb', amount: 447000 },
-                { month: 'Mar', amount: 612000 },
-            ]
+            monthlyRevenue: monthlyStats
         };
     } catch (error) {
         console.error('Error fetching dashboard stats:', error);

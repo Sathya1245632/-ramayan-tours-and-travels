@@ -7,12 +7,12 @@ import { Toaster } from 'react-hot-toast';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-    title: 'Ramayan Tours and Travels – AI-Powered Pilgrimage Travel',
-    description: 'Plan your sacred journey with AI. Book pilgrimage tours to Rameshwaram, Varanasi, Tirupati, Madurai, Kanyakumari and more with Ramayan Tours and Travels.',
-    keywords: 'pilgrimage tour, rameshwaram tour, varanasi tour, tirupati tour, madurai tour, spiritual travel india, AI trip planner, temple tour packages',
+    title: 'Ramayan Tours and Travels – Best Travels in Rameshwaram | AI Pilgrimage',
+    description: 'Experience the best pilgrimage tours in Rameshwaram. AI-powered planning for Ramanathaswamy Temple, Varanasi & more. Trusted #1 travel agency in Rameshwaram.',
+    keywords: 'best travels in rameshwaram, rameshwaram temple tour packages, rameshwaram taxi service, local tours rameshwaram, pilgrimage tour india, rameshwaram travel agency',
     openGraph: {
-        title: 'Ramayan Tours and Travels – Sacred Journey Awaits',
-        description: 'AI-powered pilgrimage planning for India\'s holiest destinations.',
+        title: 'Ramayan Tours and Travels – #1 Travel Agency in Rameshwaram',
+        description: 'Book your sacred journey to Rameshwaram with the experts. AI-powered customized tours.',
         type: 'website',
     },
 };
@@ -35,13 +35,19 @@ export default function RootLayout({
                 <script type="application/ld+json" dangerouslySetInnerHTML={{
                     __html: JSON.stringify({
                         "@context": "https://schema.org",
-                        "@type": "TravelAgency",
+                        "@type": "LocalBusiness",
                         "name": "Ramayan Tours and Travels",
-                        "description": "AI-powered pilgrimage travel platform for India's holiest destinations",
+                        "description": "Top-rated travel agency in Rameshwaram specializing in AI-powered pilgrimage tours and local transport.",
                         "url": "https://ramayantoursandtravels.com",
                         "telephone": "+91 7639 661 626",
+                        "priceRange": "$$",
+                        "areaServed": "Rameshwaram, Tamil Nadu, India",
                         "address": {
                             "@type": "PostalAddress",
+                            "streetAddress": "Agni Theertham Road",
+                            "addressLocality": "Rameshwaram",
+                            "addressRegion": "Tamil Nadu",
+                            "postalCode": "623526",
                             "addressCountry": "IN"
                         }
                     })

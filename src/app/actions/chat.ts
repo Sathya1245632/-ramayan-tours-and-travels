@@ -44,7 +44,7 @@ export async function chat(message: string, history: { role: 'user' | 'model'; p
         }
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
+        const model = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
 
         const chatSession = model.startChat({
             history: [
@@ -76,52 +76,39 @@ export async function generateAIItinerary(destination: string, days: number, bud
         if (!apiKey) throw new Error('API Key missing');
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        
-        // Use verified models from diagnostic list
-        const modelNames = ['gemini-2.0-flash', 'gemini-2.5-flash', 'gemini-pro'];
-        let lastError = null;
+        const model = genAI.getGenerativeModel({ model: 'gemini-flash-latest' });
 
-        for (const modelName of modelNames) {
-            try {
-                const model = genAI.getGenerativeModel({ model: modelName });
-                const prompt = `
-                    You are a professional travel planning expert for Ramayan Tours and Travels.
-                    Generate a spiritual pilgrimage itinerary for ${destination} for ${days} days.
-                    Travel Style: ${style}.
+        const prompt = `
+            You are a professional travel planning expert for Ramayan Tours and Travels.
+            Generate a spiritual pilgrimage itinerary for ${destination} for ${days} days.
+            Travel Style: ${style}.
 
-                    Return ONLY a JSON object:
+            Return ONLY a JSON object:
+            {
+                "destination": "${destination}",
+                "days": ${days},
+                "budget": "${style}",
+                "totalCost": 15000,
+                "itinerary": [
                     {
-                        "destination": "${destination}",
-                        "days": ${days},
-                        "budget": "${style}",
-                        "totalCost": 15000,
-                        "itinerary": [
-                            {
-                                "day": 1,
-                                "title": "Arrival",
-                                "activities": ["Check-in", "Visit main temple"],
-                                "temple": "Specific Temple",
-                                "hotel": "Hotel Name",
-                                "tip": "Travel tip"
-                            }
-                        ],
-                        "hotels": ["Hotel 1"],
-                        "transport": "Car",
-                        "highlights": ["Temple"]
+                        "day": 1,
+                        "title": "Arrival",
+                        "activities": ["Check-in", "Visit main temple"],
+                        "temple": "Specific Temple",
+                        "hotel": "Hotel Name",
+                        "tip": "Travel tip"
                     }
-                `;
-
-                const result = await model.generateContent(prompt);
-                const text = result.response.text();
-                const cleanedText = text.replace(/```json|```/g, '').trim();
-                return JSON.parse(cleanedText);
-            } catch (err: any) {
-                lastError = err;
-                if (err.status === 404) continue; // Try next model
-                throw err;
+                ],
+                "hotels": ["Hotel 1"],
+                "transport": "Car",
+                "highlights": ["Temple"]
             }
-        }
-        throw lastError;
+        `;
+
+        const result = await model.generateContent(prompt);
+        const text = result.response.text();
+        const cleanedText = text.replace(/```json|```/g, '').trim();
+        return JSON.parse(cleanedText);
     } catch (error: any) {
         console.error('Final AI Planner Error:', error);
         return { 

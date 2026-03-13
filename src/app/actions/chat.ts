@@ -77,40 +77,45 @@ export async function generateAIItinerary(destination: string, days: number, bud
         });
 
         const prompt = `
-            You are the "AI Trip Planner" for Ramayan Tours and Travels.
-            Generate a detailed, spiritual pilgrimage itinerary for ${destination} for ${days} days.
-            Budget level: ${budget} (${style}).
+            You are a professional travel planning expert for Ramayan Tours and Travels.
+            Generate a comprehensive, spiritual pilgrimage itinerary for ${destination} for ${days} days.
+            Travel Style/Budget: ${style}.
 
-            The response must be a JSON object with this exact structure:
+            Return ONLY a valid JSON object. Do not include any markdown or backticks.
+            Use this exact structure:
             {
                 "destination": "${destination}",
                 "days": ${days},
                 "budget": "${style}",
-                "totalCost": number,
+                "totalCost": 15000,
                 "itinerary": [
                     {
-                        "day": number,
-                        "title": "string",
-                        "activities": ["string", "string"],
-                        "temple": "string (main temple visit for the day)",
-                        "hotel": "string (recommended hotel name based on budget)",
-                        "tip": "string (a helpful travel tip)"
+                        "day": 1,
+                        "title": "Arrival and Evening Prayer",
+                        "activities": ["Check-in", "Main temple visit", "Local dinner"],
+                        "temple": "Specific Temple Name",
+                        "hotel": "Hotel Name based on ${style}",
+                        "tip": "Helpful tip"
                     }
                 ],
-                "hotels": ["string", "string"],
-                "transport": "string (recommended transport for this budget)",
-                "highlights": ["string", "string"]
+                "hotels": ["Hotel 1", "Hotel 2"],
+                "transport": "Transport details",
+                "highlights": ["Key spot 1", "Key spot 2"]
             }
 
-            Make sure the itinerary is culturally accurate, spiritually fulfilling, and mentions specific places in ${destination}.
-            Incorporate Ramayan Tours branding if appropriate.
+            Fill the itinerary with REAL details for ${destination}. 
+            Ensure the totalCost is a realistic number (not a string).
         `;
 
         const result = await model.generateContent(prompt);
         const response = await result.response;
-        return JSON.parse(response.text());
+        const text = response.text();
+        
+        // Clean the response in case AI adds markdown code blocks
+        const cleanedText = text.replace(/```json|```/g, '').trim();
+        return JSON.parse(cleanedText);
     } catch (error) {
-        console.error('AI Planner Error:', error);
+        console.error('AI Planner Technical Error:', error);
         return null;
     }
 }

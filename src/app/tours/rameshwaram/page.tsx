@@ -212,22 +212,73 @@ export default function RameshwaramTours() {
                 </div>
             </section>
 
-            {/* Attractions / Destinations */}
-            <section className="py-24 container mx-auto px-4">
-                <h2 className="text-3xl font-bold mb-16 text-center font-poppins">Must-Visit Places in Rameshwaram</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    {[
-                        { name: 'Ramanathaswamy Temple', icon: Compass, desc: 'The architectural marvel with 1,000 pillars.' },
-                        { name: 'Agni Theertham', icon: Waves, desc: 'The holy sea where rituals begin.' },
-                        { name: 'Dhanushkodi Ruins', icon: Church, desc: 'The ghost town at the edge of the world.' },
-                        { name: 'Pamban Bridge', icon: MapPin, desc: 'Indias first sea bridge with stunning views.' }
-                    ].map((place, idx) => (
-                        <div key={idx} className="bg-gray-900 p-8 rounded-2xl border border-white/5 hover:border-orange-500/30 transition-all">
-                            <place.icon className="w-10 h-10 text-orange-500 mb-6" />
-                            <h3 className="text-xl font-bold mb-3">{place.name}</h3>
-                            <p className="text-gray-400 text-sm leading-relaxed">{place.desc}</p>
+            {/* Focused Dhanushkodi Section */}
+            <section className="py-24 bg-gradient-to-b from-gray-950 to-gray-900 overflow-hidden">
+                <div className="container mx-auto px-4">
+                    <div className="flex flex-col lg:flex-row items-center gap-16">
+                        <div className="lg:w-1/2 relative">
+                            <div className="absolute -top-10 -left-10 w-40 h-40 bg-orange-500/20 rounded-full blur-3xl" />
+                            <div className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl">
+                                <Image 
+                                    src="https://images.unsplash.com/photo-1590050752117-23a9acd3ecf3?auto=format&fit=crop&q=80&w=1200"
+                                    alt="Dhanushkodi Landscape"
+                                    width={800}
+                                    height={600}
+                                    className="object-cover transition-transform duration-700 hover:scale-105"
+                                />
+                                <div className="absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-gray-900 to-transparent">
+                                    <div className="flex items-center gap-2 text-orange-400 font-bold mb-2">
+                                        <Compass className="w-5 h-5" />
+                                        Arichal Munai (The End of India)
+                                    </div>
+                                    <p className="text-gray-300 text-sm">Where the Bay of Bengal meets the Indian Ocean.</p>
+                                </div>
+                            </div>
                         </div>
-                    ))}
+                        <div className="lg:w-1/2">
+                            <h2 className="text-3xl md:text-5xl font-bold mb-8 font-poppins leading-tight">
+                                Dhanushkodi: <br />
+                                <span className="text-orange-500">The Lost Ghost Town</span>
+                            </h2>
+                            <div className="space-y-6 text-gray-400">
+                                <p className="text-lg leading-relaxed">
+                                    Frozen in time since the massive cyclone of 1964, Dhanushkodi offers a hauntingly beautiful landscape. Located just 20km from the main temple, it is the only land border between India and Sri Lanka (just 18 miles away).
+                                </p>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-4">
+                                    <div className="flex gap-4">
+                                        <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0">
+                                            <Church className="w-6 h-6 text-orange-500" />
+                                        </div>
+                                        <div>
+                                            <h4 className="text-white font-bold mb-1">Old Ruins</h4>
+                                            <p className="text-sm">See the remains of the church, railway station, and school.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex gap-4">
+                                        <div className="w-12 h-12 rounded-xl bg-orange-500/10 flex items-center justify-center shrink-0">
+                                            <Waves className="w-6 h-6 text-orange-500" />
+                                        </div>
+                                        <div>
+                                            <h4 className="text-white font-bold mb-1">Adam's Bridge</h4>
+                                            <p className="text-sm">Ancient limestone shoals connecting India to Sri Lanka.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="pt-8 flex flex-col sm:flex-row gap-4">
+                                    <Link 
+                                        href="https://wa.me/917639661626?text=I'd%20like%20to%20book%20a%20Dhanushkodi%20exclusive%20tour"
+                                        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-orange-600 rounded-xl font-bold text-white hover:bg-orange-500 transition-all"
+                                    >
+                                        Book Dhanushkodi Trip
+                                        <ArrowRight className="w-4 h-4" />
+                                    </Link>
+                                    <div className="p-4 bg-white/5 rounded-xl border border-white/10 text-xs italic">
+                                        Note: Entry closes at 5:00 PM. Best visited before sunset.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 

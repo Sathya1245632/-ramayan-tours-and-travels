@@ -30,10 +30,11 @@ export default function Navbar() {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
-                ? 'bg-gray-950/95 backdrop-blur-xl shadow-lg shadow-saffron-500/10 border-b border-orange-500/10'
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+                (scrolled || isOpen)
+                ? 'bg-gray-950 shadow-lg shadow-saffron-500/10 border-b border-orange-500/10'
                 : 'bg-transparent'
-                }`}
+            }`}
         >
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
@@ -110,33 +111,33 @@ export default function Navbar() {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="lg:hidden absolute top-full left-0 right-0 bg-gray-950/98 backdrop-blur-xl border-b border-orange-500/20">
-                    <div className="px-4 py-6 space-y-2">
+                <div className="lg:hidden fixed inset-x-0 top-20 bottom-0 bg-gray-950/100 z-50 overflow-y-auto">
+                    <div className="px-6 py-8 space-y-4 pb-20">
                         {navLinks.map((link) => (
                             <Link
                                 key={link.href}
                                 href={link.href}
                                 onClick={() => setIsOpen(false)}
-                                className={`block px-4 py-3 rounded-xl text-sm font-medium transition-all ${pathname === link.href
-                                    ? 'bg-gradient-to-r from-orange-500/20 to-yellow-500/20 text-orange-400 border border-orange-500/30'
-                                    : 'text-gray-300 hover:text-white hover:bg-white/5'
+                                className={`block px-5 py-4 rounded-xl text-base font-semibold transition-all ${pathname === link.href
+                                    ? 'bg-gradient-to-r from-orange-500 to-yellow-500 text-white shadow-lg shadow-orange-500/20'
+                                    : 'text-gray-300 hover:text-white hover:bg-white/5 border border-white/5'
                                     }`}
                             >
                                 {link.label}
                             </Link>
                         ))}
-                        <div className="pt-4 flex flex-col gap-3">
+                        <div className="pt-6 flex flex-col gap-4">
                             <Link
                                 href="/login"
                                 onClick={() => setIsOpen(false)}
-                                className="block text-center px-4 py-3 text-sm text-white border border-white/20 rounded-xl hover:border-orange-500/50 transition-all"
+                                className="block text-center px-5 py-4 text-base font-semibold text-white border border-white/10 rounded-xl hover:border-orange-500/50 hover:bg-orange-500/5 transition-all"
                             >
                                 Login / Signup
                             </Link>
                             <Link
                                 href="/booking"
                                 onClick={() => setIsOpen(false)}
-                                className="block text-center px-4 py-3 text-sm font-semibold text-white bg-gradient-to-r from-orange-500 to-yellow-500 rounded-xl"
+                                className="block text-center px-5 py-4 text-base font-bold text-white bg-gradient-to-r from-orange-500 to-yellow-500 rounded-xl shadow-lg shadow-orange-500/30"
                             >
                                 Book Now
                             </Link>

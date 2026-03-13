@@ -11,48 +11,14 @@ interface Message {
     time: string;
 }
 
+import { chat } from '@/app/actions/chat';
+
 const quickReplies = [
     'Best pilgrimage in South India?',
     'Rameshwaram package price?',
     'Temple timings in Varanasi?',
     'AI trip planning help',
 ];
-
-const botResponses: Record<string, string> = {
-    default: "Namaste! 🙏 I'm your AI travel assistant for Ramayan Tours. I can help you plan your sacred pilgrimage, suggest destinations, explain temple timings, and find the perfect package. How may I assist you today?",
-};
-
-function getBotResponse(message: string): string {
-    const lower = message.toLowerCase();
-    if (lower.includes('rameshwaram') || lower.includes('rameswaram')) {
-        return "🕌 **Rameshwaram** is one of India's holiest sites! Our 3-Day Spiritual Tour starts at ₹8,999 per person. It includes darshan at Ramanathaswamy Temple, the 22 Theerthams ritual, Dhanushkodi beach visit and Pamban Bridge. Would you like me to generate a detailed itinerary?";
-    }
-    if (lower.includes('varanasi') || lower.includes('kashi')) {
-        return "🌊 **Varanasi (Kashi)** is the spiritual capital of India! Our 4-Day Kashi Vishwanath Pilgrimage at ₹14,999 includes Kashi Vishwanath darshan, evening Ganga Aarti, sunrise boat ride, and Sarnath visit. The Ganga Aarti at 7 PM is absolutely divine!";
-    }
-    if (lower.includes('tirupati') || lower.includes('balaji')) {
-        return "⛩️ **Tirupati Balaji** is the world's richest temple! Our 2-Day package at ₹9,499 includes VIP darshan tickets, ropeway ride to Tirumala, Laddu prasad, and Tiruchanur temple visit. Book 30 days in advance for best slots!";
-    }
-    if (lower.includes('madurai') || lower.includes('meenakshi')) {
-        return "🏛️ **Madurai & Meenakshi Temple** – the city that never sleeps! Our 2-Day Temple Yatra at ₹6,999 covers the magnificent Meenakshi Amman Temple, evening aarti, Thirumalai Nayak Palace, and local food tour.";
-    }
-    if (lower.includes('price') || lower.includes('cost') || lower.includes('package')) {
-        return "💰 Our packages start from ₹6,999! Here's a quick overview:\n• Madurai: ₹6,999 (2 days)\n• Rameshwaram: ₹8,999 (3 days)\n• Tirupati: ₹9,499 (2 days)\n• Varanasi: ₹14,999 (4 days)\n• South India Circuit: ₹32,999 (7 days)\n\nAll include hotel, meals & guided temple visits!";
-    }
-    if (lower.includes('timing') || lower.includes('time') || lower.includes('open')) {
-        return "⏰ General temple timings:\n• Kashi Vishwanath: 3 AM – 11 PM\n• Ramanathaswamy: 5 AM – 9 PM\n• Meenakshi Amman: 5 AM – 12:30 PM, 4 PM – 9:30 PM\n• Tirumala: Darshan 24 hrs with breaks\n\nI recommend visiting between 6–8 AM for a peaceful experience!";
-    }
-    if (lower.includes('south') || lower.includes('circuit')) {
-        return "🗺️ Our **7-Day South India Sacred Circuit** at ₹32,999 is our most popular package! It covers Tirupati → Madurai → Rameshwaram → Kanyakumari. Includes 5-star hotels, private car, VIP darshan, all meals, and flights!";
-    }
-    if (lower.includes('booking') || lower.includes('book')) {
-        return "📋 Booking is simple! Go to our **Packages page** → Click 'Book Now' → Fill traveler details → Choose payment method (UPI/Card/Net Banking). Or WhatsApp us at +91-98765-43210 for instant booking!";
-    }
-    if (lower.includes('ai') || lower.includes('planner') || lower.includes('itinerary')) {
-        return "✨ Our **AI Trip Planner** creates personalized day-by-day itineraries! Just tell me:\n1. Destination(s)\n2. Number of days\n3. Budget preference\n\nThe AI will generate temple schedules, hotel recommendations, travel routes, and cost estimates instantly!";
-    }
-    return "Namaste! 🙏 I'd be happy to help you plan your sacred journey! You can ask me about:\n• Specific destinations (Rameshwaram, Varanasi, Tirupati)\n• Package prices and inclusions\n• Temple timings and rituals\n• AI trip planning\n• Booking process\n\nWhat would you like to know?";
-}
 
 export default function ChatBot() {
     const [isOpen, setIsOpen] = useState(false);
@@ -83,19 +49,34 @@ export default function ChatBot() {
         };
 
         setMessages((prev) => [...prev, userMsg]);
+        const currentHistory = messages.map(m => ({ 
+            role: m.sender === 'user' ? 'user' : 'model' as 'user' | 'model', 
+            parts: m.text 
+        }));
+
         setInput('');
         setIsTyping(true);
 
-        setTimeout(() => {
+        try {
+            const result = await chat(text, currentHistory);
             const botMsg: Message = {
                 id: Date.now() + 1,
-                text: getBotResponse(text),
+                text: result.text || "I'm sorry, I couldn't connect to my AI core. Please try again later! 🙏",
                 sender: 'bot',
                 time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
             };
             setMessages((prev) => [...prev, botMsg]);
+        } catch (error) {
+            const errorMsg: Message = {
+                id: Date.now() + 1,
+                text: "I encountered a problem connecting to the spiritual network. Please call us directly! 🙏",
+                sender: 'bot',
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            };
+            setMessages((prev) => [...prev, errorMsg]);
+        } finally {
             setIsTyping(false);
-        }, 1200);
+        }
     };
 
     return (

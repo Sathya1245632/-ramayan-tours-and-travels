@@ -60,9 +60,13 @@ export async function chat(message: string, history: { role: 'user' | 'model'; p
         const result = await chatSession.sendMessage(message);
         const response = await result.response;
         return { success: true, text: response.text() };
-    } catch (error) {
+    } catch (error: any) {
         console.error('Chat AI error:', error);
-        return { success: false, error: 'AI Error', text: "Forgive me, I encountered a connection issue. Please try again or WhatsApp us directly! 🙏" };
+        return { 
+            success: false, 
+            error: error.message || 'AI Error', 
+            text: `Connection Issue: ${error.message || 'Please check your API key and region.'} 🙏` 
+        };
     }
 }
 
@@ -118,8 +122,11 @@ export async function generateAIItinerary(destination: string, days: number, bud
             }
         }
         throw lastError;
-    } catch (error) {
+    } catch (error: any) {
         console.error('Final AI Planner Error:', error);
-        return null;
+        return { 
+            error: true, 
+            message: error.message || 'Unknown AI error'
+        };
     }
 }

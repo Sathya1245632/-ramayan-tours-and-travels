@@ -157,12 +157,13 @@ export default function AIPlannerPage() {
                 formData.style
             );
 
-            if (result) {
+            if (result && !result.error) {
                 setItinerary(result);
             } else {
-                alert("The AI had a temporary spiritual block. Please ensure your Gemini API Key is correctly set in Vercel and try again! 🙏");
+                const errorMsg = result?.message || "Please check your AI API Key settings.";
+                alert(`AI Connection Error: ${errorMsg} 🙏`);
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
             alert("Connection error. Please check your internet or Vercel logs. 🙏");
         } finally {

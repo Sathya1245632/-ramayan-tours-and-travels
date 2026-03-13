@@ -31,7 +31,7 @@ const packages = [
         duration: '4-5 Hours',
         description: 'Perfect for completing your sacred rituals at the main temple and holy theerthams.',
         includes: ['Ramanathaswamy Temple', 'Agni Theertham', '22 Wells Bathing', 'Gandha Madhana Parvatham'],
-        image: 'https://images.unsplash.com/photo-1582510003544-2d095665039b?auto=format&fit=crop&q=80&w=800'
+        image: '/images/tours/rameshwaram/temple.png'
     },
     {
         id: 'dhanushkodi-special',
@@ -40,7 +40,7 @@ const packages = [
         duration: '6-8 Hours',
         description: 'An unforgettable journey to the "Ghost Town" and the tip of India where two oceans meet.',
         includes: ['Dhanushkodi Beach', 'Old Town Ruins', 'Ram Setu Point', 'Kothandaramaswamy Temple'],
-        image: 'https://images.unsplash.com/photo-1590050752117-23a9acd3ecf3?auto=format&fit=crop&q=80&w=800',
+        image: '/images/tours/rameshwaram/road.png',
         highlight: 'Most Popular'
     },
     {
@@ -50,7 +50,7 @@ const packages = [
         duration: 'Full Day',
         description: 'The ultimate Rameshwaram experience covering every major spiritual and historical site.',
         includes: ['All Local Temples', 'Dhanushkodi', 'Pamban Bridge View', 'APJ Abdul Kalam Memorial'],
-        image: 'https://images.unsplash.com/photo-1621528434720-3b60fb4d402b?auto=format&fit=crop&q=80&w=800'
+        image: '/images/tours/rameshwaram/bridge.png'
     }
 ];
 
@@ -220,7 +220,7 @@ export default function RameshwaramTours() {
                             <div className="absolute -top-10 -left-10 w-40 h-40 bg-orange-500/20 rounded-full blur-3xl" />
                             <div className="relative rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl">
                                 <Image 
-                                    src="https://images.unsplash.com/photo-1590050752117-23a9acd3ecf3?auto=format&fit=crop&q=80&w=1200"
+                                    src="/images/tours/rameshwaram/ruins.png"
                                     alt="Dhanushkodi Landscape"
                                     width={800}
                                     height={600}

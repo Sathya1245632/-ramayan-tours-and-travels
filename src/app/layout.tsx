@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import MainLayoutWrapper from '@/components/MainLayoutWrapper';
 import { Toaster } from 'react-hot-toast';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -67,6 +68,7 @@ export default function RootLayout({
                 <MainLayoutWrapper>
                     {children}
                 </MainLayoutWrapper>
+                <SpeedInsights />
             </body>
         </html>
     );

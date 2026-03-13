@@ -66,33 +66,35 @@ export default function BlogPage() {
             {/* Featured Post */}
             {filtered.length > 0 && (
                 <div className="max-w-7xl mx-auto px-4 mb-12">
-                    <div className="group relative rounded-2xl overflow-hidden h-80 card-hover cursor-pointer">
-                        <Image
-                            src={filtered[0].image}
-                            alt={filtered[0].title}
-                            fill
-                            className="object-cover transition-transform duration-700 group-hover:scale-105"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-950/50 to-transparent" />
-                        <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                            <div className="badge-saffron inline-block mb-3 self-start">{filtered[0].category}</div>
-                            <h2 className="text-white font-black text-2xl md:text-3xl font-poppins mb-3 max-w-xl">
-                                {filtered[0].title}
-                            </h2>
-                            <p className="text-gray-300 mb-4 max-w-xl">{filtered[0].excerpt}</p>
-                            <div className="flex items-center gap-4 text-sm text-gray-400">
-                                <div className="flex items-center gap-1">
-                                    <User className="w-3.5 h-3.5 text-orange-400" />
-                                    <span>{filtered[0].author}</span>
+                    <Link href={`/blog/${filtered[0].slug}`}>
+                        <div className="group relative rounded-2xl overflow-hidden h-80 card-hover cursor-pointer border border-white/5 shadow-2xl">
+                            <Image
+                                src={filtered[0].image}
+                                alt={filtered[0].title}
+                                fill
+                                className="object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-gray-950/95 via-gray-950/40 to-transparent" />
+                            <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                                <div className="badge-saffron inline-block mb-3 self-start">{filtered[0].category}</div>
+                                <h2 className="text-white font-black text-2xl md:text-3xl font-poppins mb-3 max-w-xl group-hover:text-orange-400 transition-colors">
+                                    {filtered[0].title}
+                                </h2>
+                                <p className="text-gray-300 mb-4 max-w-xl line-clamp-2">{filtered[0].excerpt}</p>
+                                <div className="flex items-center gap-4 text-sm text-gray-400">
+                                    <div className="flex items-center gap-1">
+                                        <User className="w-3.5 h-3.5 text-orange-400" />
+                                        <span>{filtered[0].author}</span>
+                                    </div>
+                                    <div className="flex items-center gap-1">
+                                        <Clock className="w-3.5 h-3.5 text-orange-400" />
+                                        <span>{filtered[0].readTime}</span>
+                                    </div>
+                                    <span>{filtered[0].date}</span>
                                 </div>
-                                <div className="flex items-center gap-1">
-                                    <Clock className="w-3.5 h-3.5 text-orange-400" />
-                                    <span>{filtered[0].readTime}</span>
-                                </div>
-                                <span>{filtered[0].date}</span>
                             </div>
                         </div>
-                    </div>
+                    </Link>
                 </div>
             )}
 
@@ -100,9 +102,10 @@ export default function BlogPage() {
             <div className="max-w-7xl mx-auto px-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filtered.slice(1).map((post) => (
-                        <div
+                        <Link
                             key={post.id}
-                            className="bg-gray-900 rounded-2xl overflow-hidden border border-white/5 hover:border-orange-500/30 card-hover group"
+                            href={`/blog/${post.slug}`}
+                            className="bg-gray-900 rounded-2xl overflow-hidden border border-white/5 hover:border-orange-500/30 card-hover group shadow-xl"
                         >
                             <div className="relative h-48 overflow-hidden">
                                 <Image
@@ -116,7 +119,7 @@ export default function BlogPage() {
                                 </div>
                             </div>
                             <div className="p-6">
-                                <h3 className="text-white font-bold text-lg font-poppins mb-3 line-clamp-2">{post.title}</h3>
+                                <h3 className="text-white font-bold text-lg font-poppins mb-3 line-clamp-2 group-hover:text-orange-400 transition-colors">{post.title}</h3>
                                 <p className="text-gray-400 text-sm mb-4 line-clamp-2">{post.excerpt}</p>
                                 <div className="flex items-center justify-between text-xs text-gray-500 pt-4 border-t border-white/5">
                                     <div className="flex items-center gap-3">
@@ -129,7 +132,7 @@ export default function BlogPage() {
                                     </span>
                                 </div>
                             </div>
-                        </div>
+                        </Link>
                     ))}
                 </div>
             </div>

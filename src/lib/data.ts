@@ -288,6 +288,17 @@ export const reviews = [
 
 export const blogPosts = [
     {
+        id: 5,
+        title: 'Madurai to Rameshwaram Road Trip: Best Routes & Must-Visit Temples',
+        excerpt: 'Planning a road trip from Madurai to Rameshwaram? Discover the most scenic routes, hidden temples along the way, and essential tips for a perfect spiritual drive...',
+        image: '/images/madurai.jpg',
+        category: 'Travel Guide',
+        author: 'Sathya Narayanan',
+        date: 'March 14, 2025',
+        readTime: '10 min read',
+        slug: 'madurai-to-rameshwaram-road-trip-guide',
+    },
+    {
         id: 1,
         title: '22 Theerthams of Rameshwaram: A Complete Guide',
         excerpt: 'Discover the spiritual significance and rituals of the 22 sacred water bodies inside Ramanathaswamy Temple...',

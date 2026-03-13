@@ -83,8 +83,8 @@ export default function ChatBot() {
         <>
             {/* Chat Window */}
             {isOpen && (
-                <div className="fixed bottom-24 right-6 z-50 w-80 sm:w-96 rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border border-orange-500/20 flex flex-col"
-                    style={{ height: '480px' }}>
+                <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[1001] w-[calc(100%-2rem)] sm:w-96 rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border border-orange-500/20 flex flex-col transition-all duration-300"
+                    style={{ height: 'calc(100dvh - 2rem)', maxHeight: '580px' }}>
                     {/* Header */}
                     <div className="bg-gradient-to-r from-orange-500 to-yellow-500 p-4 flex items-center justify-between">
                         <div className="flex items-center gap-3">
@@ -152,7 +152,7 @@ export default function ChatBot() {
                             <div className="flex gap-2.5">
                                 <div className="w-7 h-7 rounded-full overflow-hidden bg-gradient-to-br from-orange-500 to-yellow-500 flex items-center justify-center">
                                     <Image
-                                        src="/images/ramayan-logo.png"
+                                        src="/images/logo-gold.jpg"
                                         alt="Bot"
                                         width={28}
                                         height={28}
@@ -188,18 +188,19 @@ export default function ChatBot() {
                         ))}
                     </div>
 
-                    {/* Input */}
                     <div className="bg-gray-900 p-3 border-t border-white/5 flex gap-2">
                         <input
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
-                            onKeyPress={(e) => e.key === 'Enter' && sendMessage(input)}
-                            placeholder="Ask about pilgrimage packages..."
-                            className="flex-1 bg-gray-800 text-white text-sm px-4 py-2.5 rounded-xl outline-none border border-white/10 focus:border-orange-500/50 placeholder:text-gray-500 transition-colors"
+                            onKeyPress={(e) => e.key === 'Enter' && !isTyping && sendMessage(input)}
+                            placeholder={isTyping ? "AI is thinking..." : "Ask about pilgrimage packages..."}
+                            disabled={isTyping}
+                            className="flex-1 bg-gray-800 text-white text-sm px-4 py-2.5 rounded-xl outline-none border border-white/10 focus:border-orange-500/50 placeholder:text-gray-500 transition-colors disabled:opacity-50"
                         />
                         <button
                             onClick={() => sendMessage(input)}
-                            className="w-10 h-10 rounded-xl bg-gradient-to-r from-orange-500 to-yellow-500 flex items-center justify-center hover:shadow-lg hover:shadow-orange-500/30 transition-all"
+                            disabled={isTyping || !input.trim()}
+                            className="w-10 h-10 rounded-xl bg-gradient-to-r from-orange-500 to-yellow-500 flex items-center justify-center hover:shadow-lg hover:shadow-orange-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                             <Send className="w-4 h-4 text-white" />
                         </button>

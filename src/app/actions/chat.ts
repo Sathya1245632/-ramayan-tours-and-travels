@@ -2,8 +2,7 @@
 
 import { GoogleGenerativeAI } from '@google/generative-ai';
 
-// IMPORTANT: You need to set GEMINI_API_KEY in your .env file
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
+// Google AI initialization will happen inside the functions to ensure fresh ENV variables 
 
 const SYSTEM_PROMPT = `
 You are the "Yatra AI Assistant" for Ramayan Tours and Travels, based in Rameshwaram. 
@@ -35,15 +34,17 @@ Guidelines:
 
 export async function chat(message: string, history: { role: 'user' | 'model'; parts: string }[]) {
     try {
-        if (!process.env.GEMINI_API_KEY) {
+        const apiKey = process.env.GEMINI_API_KEY;
+        if (!apiKey) {
             return { 
                 success: false, 
                 error: 'API Key missing',
-                text: "I am currently in 'Offline Mode'. Please ask the administrator to add the Gemini API Key to the .env file to enable my full AI brain! 🙏"
+                text: "Namaste! I am currently in 'Offline Mode'. Please check Vercel settings for GEMINI_API_KEY! 🙏"
             };
         }
 
-        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash-latest' });
+        const genAI = new GoogleGenerativeAI(apiKey);
+        const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
         const chatSession = model.startChat({
             history: [
@@ -61,61 +62,64 @@ export async function chat(message: string, history: { role: 'user' | 'model'; p
         return { success: true, text: response.text() };
     } catch (error) {
         console.error('Chat AI error:', error);
-        return { success: false, error: 'AI Error', text: "Forgive me, I encountered a small spiritual block. Please try again or WhatsApp us directly! 🙏" };
+        return { success: false, error: 'AI Error', text: "Forgive me, I encountered a connection issue. Please try again or WhatsApp us directly! 🙏" };
     }
 }
 
 export async function generateAIItinerary(destination: string, days: number, budget: string, style: string) {
     try {
-        if (!process.env.GEMINI_API_KEY) {
-            throw new Error('API Key missing');
-        }
+        const apiKey = process.env.GEMINI_API_KEY;
+        if (!apiKey) throw new Error('API Key missing');
 
-        const model = genAI.getGenerativeModel({ 
-            model: 'gemini-1.5-flash-latest',
-            generationConfig: { responseMimeType: "application/json" }
-        });
-
-        const prompt = `
-            You are a professional travel planning expert for Ramayan Tours and Travels.
-            Generate a comprehensive, spiritual pilgrimage itinerary for ${destination} for ${days} days.
-            Travel Style/Budget: ${style}.
-
-            Return ONLY a valid JSON object. Do not include any markdown or backticks.
-            Use this exact structure:
-            {
-                "destination": "${destination}",
-                "days": ${days},
-                "budget": "${style}",
-                "totalCost": 15000,
-                "itinerary": [
-                    {
-                        "day": 1,
-                        "title": "Arrival and Evening Prayer",
-                        "activities": ["Check-in", "Main temple visit", "Local dinner"],
-                        "temple": "Specific Temple Name",
-                        "hotel": "Hotel Name based on ${style}",
-                        "tip": "Helpful tip"
-                    }
-                ],
-                "hotels": ["Hotel 1", "Hotel 2"],
-                "transport": "Transport details",
-                "highlights": ["Key spot 1", "Key spot 2"]
-            }
-
-            Fill the itinerary with REAL details for ${destination}. 
-            Ensure the totalCost is a realistic number (not a string).
-        `;
-
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const text = response.text();
+        const genAI = new GoogleGenerativeAI(apiKey);
         
-        // Clean the response in case AI adds markdown code blocks
-        const cleanedText = text.replace(/```json|```/g, '').trim();
-        return JSON.parse(cleanedText);
+        // Try multiple model aliases in case of 404
+        const modelNames = ['gemini-1.5-flash', 'gemini-1.5-pro', 'gemini-pro'];
+        let lastError = null;
+
+        for (const modelName of modelNames) {
+            try {
+                const model = genAI.getGenerativeModel({ model: modelName });
+                const prompt = `
+                    You are a professional travel planning expert for Ramayan Tours and Travels.
+                    Generate a spiritual pilgrimage itinerary for ${destination} for ${days} days.
+                    Travel Style: ${style}.
+
+                    Return ONLY a JSON object:
+                    {
+                        "destination": "${destination}",
+                        "days": ${days},
+                        "budget": "${style}",
+                        "totalCost": 15000,
+                        "itinerary": [
+                            {
+                                "day": 1,
+                                "title": "Arrival",
+                                "activities": ["Check-in", "Visit main temple"],
+                                "temple": "Specific Temple",
+                                "hotel": "Hotel Name",
+                                "tip": "Travel tip"
+                            }
+                        ],
+                        "hotels": ["Hotel 1"],
+                        "transport": "Car",
+                        "highlights": ["Temple"]
+                    }
+                `;
+
+                const result = await model.generateContent(prompt);
+                const text = result.response.text();
+                const cleanedText = text.replace(/```json|```/g, '').trim();
+                return JSON.parse(cleanedText);
+            } catch (err: any) {
+                lastError = err;
+                if (err.status === 404) continue; // Try next model
+                throw err;
+            }
+        }
+        throw lastError;
     } catch (error) {
-        console.error('AI Planner Technical Error:', error);
+        console.error('Final AI Planner Error:', error);
         return null;
     }
 }

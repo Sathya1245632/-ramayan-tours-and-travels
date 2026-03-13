@@ -130,3 +130,22 @@ export async function generateAIItinerary(destination: string, days: number, bud
         };
     }
 }
+
+export async function listAIModels() {
+    try {
+        const apiKey = process.env.GEMINI_API_KEY;
+        if (!apiKey) return { success: false, error: 'No API Key' };
+
+        // We use a simple fetch to list models directly from the API
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${apiKey}`);
+        const data = await response.json();
+        
+        if (!response.ok) {
+            return { success: false, error: data.error?.message || 'Failed to fetch models' };
+        }
+
+        return { success: true, models: data.models };
+    } catch (error: any) {
+        return { success: false, error: error.message };
+    }
+}

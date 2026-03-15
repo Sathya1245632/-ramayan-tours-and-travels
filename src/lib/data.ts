@@ -419,7 +419,7 @@ export const destinations = [
         id: 'bangalore',
         name: 'Bangalore',
         state: 'South India',
-        image: '/images/kanyakumari.jpg',
+        image: '/images/bangalore.png',
         description: 'Explore the divine beauty and rich heritage of Bangalore.',
         rating: 4.8,
         reviews: Math.floor(Math.random() * 5000) + 1000,

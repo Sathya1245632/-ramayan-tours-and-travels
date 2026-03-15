@@ -293,7 +293,7 @@ export const destinations = [
         id: 'munnar',
         name: 'Munnar',
         state: 'South India',
-        image: '/images/rameshwaram-hero.jpg',
+        image: '/images/munnar.png',
         description: 'Explore the divine beauty and rich heritage of Munnar.',
         rating: 4.8,
         reviews: Math.floor(Math.random() * 5000) + 1000,

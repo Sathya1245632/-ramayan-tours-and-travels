@@ -167,7 +167,7 @@ export const destinations = [
         id: 'velankanni',
         name: 'Velankanni',
         state: 'South India',
-        image: '/images/kanyakumari.jpg',
+        image: '/images/velankanni.png',
         description: 'Explore the divine beauty and rich heritage of Velankanni.',
         rating: 4.8,
         reviews: Math.floor(Math.random() * 5000) + 1000,

@@ -398,7 +398,7 @@ export const destinations = [
         id: 'coimbatore',
         name: 'Coimbatore',
         state: 'South India',
-        image: '/images/tirupati.jpg',
+        image: '/images/coimbatore.png',
         description: 'Explore the divine beauty and rich heritage of Coimbatore.',
         rating: 4.8,
         reviews: Math.floor(Math.random() * 5000) + 1000,

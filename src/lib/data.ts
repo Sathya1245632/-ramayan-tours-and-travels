@@ -272,7 +272,7 @@ export const destinations = [
         id: 'kodaikanal',
         name: 'Kodaikanal',
         state: 'South India',
-        image: '/images/madurai.jpg',
+        image: '/images/kodaikanal.png',
         description: 'Explore the divine beauty and rich heritage of Kodaikanal.',
         rating: 4.8,
         reviews: Math.floor(Math.random() * 5000) + 1000,

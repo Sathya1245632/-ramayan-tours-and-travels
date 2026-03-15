@@ -230,7 +230,7 @@ export const destinations = [
         id: 'trichy',
         name: 'Trichy',
         state: 'South India',
-        image: '/images/tirupati.jpg',
+        image: '/images/trichy.png',
         description: 'Explore the divine beauty and rich heritage of Trichy.',
         rating: 4.8,
         reviews: Math.floor(Math.random() * 5000) + 1000,

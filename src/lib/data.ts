@@ -461,7 +461,7 @@ export const destinations = [
         id: 'coorg',
         name: 'Coorg',
         state: 'South India',
-        image: '/images/rameshwaram-hero.jpg',
+        image: '/images/coorg.png',
         description: 'Explore the divine beauty and rich heritage of Coorg.',
         rating: 4.8,
         reviews: Math.floor(Math.random() * 5000) + 1000,

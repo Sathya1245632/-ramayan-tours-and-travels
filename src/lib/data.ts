@@ -377,7 +377,7 @@ export const destinations = [
         id: 'ooty',
         name: 'Ooty',
         state: 'South India',
-        image: '/images/rameshwaram-hero.jpg',
+        image: '/images/ooty.png',
         description: 'Explore the divine beauty and rich heritage of Ooty.',
         rating: 4.8,
         reviews: Math.floor(Math.random() * 5000) + 1000,

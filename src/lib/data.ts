@@ -356,7 +356,7 @@ export const destinations = [
         id: 'cochin',
         name: 'Cochin',
         state: 'South India',
-        image: '/images/madurai.jpg',
+        image: '/images/cochin.png',
         description: 'Explore the divine beauty and rich heritage of Cochin.',
         rating: 4.8,
         reviews: Math.floor(Math.random() * 5000) + 1000,

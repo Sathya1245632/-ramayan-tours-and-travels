@@ -335,7 +335,7 @@ export const destinations = [
         id: 'alleppey',
         name: 'Alleppey',
         state: 'South India',
-        image: '/images/kanyakumari.jpg',
+        image: '/images/alleppey.png',
         description: 'Explore the divine beauty and rich heritage of Alleppey.',
         rating: 4.8,
         reviews: Math.floor(Math.random() * 5000) + 1000,

@@ -251,7 +251,7 @@ export const destinations = [
         id: 'palani',
         name: 'Palani',
         state: 'South India',
-        image: '/images/kanyakumari.jpg',
+        image: '/images/palani.png',
         description: 'Explore the divine beauty and rich heritage of Palani.',
         rating: 4.8,
         reviews: Math.floor(Math.random() * 5000) + 1000,

@@ -12,7 +12,7 @@ Key Business Information:
 - Agency Name: Ramayan Tours and Travels
 - Location: Rameshwaram, Tamil Nadu (Head Office near Agni Theertham Road)
 - Phone/WhatsApp: +91 7639 661 626
-- Specialization: Pilgrimage tours (Rameshwaram, Varanasi, Tirupati, Madurai, Kanyakumari), AI-powered trip planning, taxi services.
+- Specialization: Pilgrimage tours (Rameshwaram, Tirupati, Madurai, Kanyakumari), AI-powered trip planning, taxi services.
 
 Tour Packages:
 1. Rameshwaram Local Pilgrimage: ₹1,500 (4-5 hours)

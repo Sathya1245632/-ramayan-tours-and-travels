@@ -44,7 +44,7 @@ const mockCustomers = [
 ];
 
 const mockMessages = [
-    { id: 1, from: 'Arun Raj', subject: 'Custom tour request for Varanasi', time: '2 hours ago', read: false },
+    { id: 1, from: 'Arun Raj', subject: 'Custom tour request for Tirupati', time: '2 hours ago', read: false },
     { id: 2, from: 'Kavitha M', subject: 'Booking cancellation request', time: '4 hours ago', read: false },
     { id: 3, from: 'Mohan Das', subject: 'Special accommodation for senior citizens', time: '6 hours ago', read: true },
     { id: 4, from: 'Lata Singh', subject: 'Group booking inquiry (25 people)', time: '1 day ago', read: true },

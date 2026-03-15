@@ -107,10 +107,7 @@ export default function DestinationDetailPage({ params }: { params: { id: string
                                     <span>State</span>
                                     <span className="text-white">{dest.state}</span>
                                 </div>
-                                <div className="flex justify-between text-gray-400 py-2">
-                                    <span>Starting from</span>
-                                    <span className="text-orange-400 font-bold text-base">₹{dest.price.toLocaleString()}</span>
-                                </div>
+
                             </div>
                             <Link
                                 href="/ai-planner"

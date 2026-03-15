@@ -13,9 +13,9 @@ const heroSlides = [
         image: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?w=1920&q=90',
     },
     {
-        title: 'Varanasi',
-        subtitle: 'The Eternal City of Shiva',
-        image: 'https://images.unsplash.com/photo-1561361058-c24cecae35ca?w=1920&q=90',
+        title: 'Tirupati',
+        subtitle: 'Abode of Lord Venkateswara',
+        image: '/images/tirupati.jpg',
     },
     {
         title: 'Madurai',
@@ -72,7 +72,7 @@ export default function HomePage() {
                     </h1>
 
                     <p className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed px-2">
-                        Smart pilgrimage planning for India's holiest destinations. From Varanasi to Rameshwaram — crafted with devotion, powered by AI.
+                        Smart pilgrimage planning for India's holiest destinations. From Tirupati to Rameshwaram — crafted with devotion, powered by AI.
                     </p>
 
                     {/* AI Search Bar */}
@@ -101,7 +101,7 @@ export default function HomePage() {
                         {/* Quick suggestions */}
                         <div className="flex flex-wrap justify-center gap-2 mt-4">
                             {[
-                                '🛕 Varanasi',
+                                '🛕 Tirupati',
                                 '🌊 Rameshwaram',
                                 '✈️ South Circuit',
                                 '🏛️ Madurai',
@@ -156,7 +156,7 @@ export default function HomePage() {
                         <div className="badge-saffron inline-block mb-4">🗺️ Sacred Destinations</div>
                         <h2 className="section-title gradient-text mb-4">Explore Holy Sites</h2>
                         <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                            From the shores of Rameshwaram to the ghats of Varanasi — discover India's most divine pilgrimage destinations.
+                            From the shores of Rameshwaram to the hills of Tirupati — discover India's most divine pilgrimage destinations.
                         </p>
                     </div>
 
@@ -194,7 +194,7 @@ export default function HomePage() {
                                         <span>{dest.duration}</span>
                                     </div>
                                     <div className="flex items-center justify-between mt-3">
-                                        <span className="text-orange-400 font-bold">From ₹{dest.price.toLocaleString()}</span>
+                                        <div />
                                         <span className="text-gray-400 group-hover:text-orange-400 transition-colors flex items-center gap-1 text-sm">
                                             Explore <ArrowRight className="w-3.5 h-3.5" />
                                         </span>

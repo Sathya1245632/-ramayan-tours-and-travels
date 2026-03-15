@@ -119,7 +119,7 @@ export default function DestinationsPage() {
                                             <div className="text-gray-500 text-xs flex items-center gap-1">
                                                 <Clock className="w-3 h-3" /> {dest.bestTime}
                                             </div>
-                                            <div className="text-white font-bold mt-0.5">From ₹{dest.price.toLocaleString()}</div>
+
                                         </div>
                                         <span className="flex items-center gap-1 text-orange-400 text-sm group-hover:gap-2 transition-all">
                                             Explore <ArrowRight className="w-4 h-4" />

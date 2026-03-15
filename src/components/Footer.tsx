@@ -88,7 +88,6 @@ export default function Footer() {
                         <ul className="space-y-3">
                             {[
                                 { href: '/destinations/rameshwaram', label: 'Rameshwaram' },
-                                { href: '/destinations/varanasi', label: 'Varanasi' },
                                 { href: '/destinations/madurai', label: 'Madurai' },
                                 { href: '/destinations/tirupati', label: 'Tirupati' },
                                 { href: '/destinations/kanyakumari', label: 'Kanyakumari' },

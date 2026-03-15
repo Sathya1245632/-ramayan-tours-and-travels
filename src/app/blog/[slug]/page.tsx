@@ -96,7 +96,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
                                 Why Professional Planning Matters
                             </h2>
                             <p>
-                                Traveling to ancient temple cities like Madurai or Varanasi can be overwhelming due to crowds, complex rituals, and local logistics. Using a specialized travel agency ensures that you don't miss the subtle details that make a pilgrimage truly sacred—the right aarti time, the correct sequence of theerthams, or the best place to find satvik food.
+                                Traveling to ancient temple cities like Madurai or Tirupati can be overwhelming due to crowds, complex rituals, and local logistics. Using a specialized travel agency ensures that you don't miss the subtle details that make a pilgrimage truly sacred—the right aarti time, the correct sequence of theerthams, or the best place to find satvik food.
                             </p>
                         </div>
                     </div>

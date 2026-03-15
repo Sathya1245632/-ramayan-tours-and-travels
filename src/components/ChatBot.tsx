@@ -16,7 +16,6 @@ import { chat } from '@/app/actions/chat';
 const quickReplies = [
     'Best pilgrimage in South India?',
     'Rameshwaram package price?',
-    'Temple timings in Varanasi?',
     'AI trip planning help',
 ];
 

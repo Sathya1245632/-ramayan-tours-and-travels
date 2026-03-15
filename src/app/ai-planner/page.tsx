@@ -60,49 +60,7 @@ const MOCK_ITINERARIES: Record<string, GeneratedItinerary> = {
         transport: 'AC Bus from Madurai + Local auto/jeep',
         highlights: ['Ramanathaswamy Temple', '22 Theerthams ritual', 'Pamban Bridge', 'Dhanushkodi beach'],
     },
-    varanasi: {
-        destination: 'Varanasi',
-        days: 4,
-        budget: 'Premium',
-        totalCost: 14999,
-        itinerary: [
-            {
-                day: 1,
-                title: 'Arrival & Ganga Aarti',
-                activities: ['Arrive at Varanasi airport', 'Check-in at riverside hotel', 'Evening walk on Dashashwamedh Ghat', 'Witness the grand Ganga Aarti ceremony at 7 PM'],
-                temple: 'Dashashwamedh Ghat – Ganga Aarti',
-                hotel: 'BrijRama Palace, Varanasi',
-                tip: 'Arrive early at the ghat to get a good viewing spot for the Aarti.',
-            },
-            {
-                day: 2,
-                title: 'Kashi Vishwanath Darshan',
-                activities: ['Sunrise boat ride on the Ganga', 'Breakfast at riverside café', 'Kashi Vishwanath Temple darshan', 'Explore the narrow lanes of the old city', 'Evening at Assi Ghat'],
-                temple: 'Kashi Vishwanath Temple – Main darshan',
-                hotel: 'BrijRama Palace, Varanasi',
-                tip: 'Non-Hindus are not allowed inside Kashi Vishwanath – visit the adjacent temple instead.',
-            },
-            {
-                day: 3,
-                title: 'Sarnath Pilgrimage',
-                activities: ['Morning: Sankat Mochan Temple', 'Drive to Sarnath (12 km)', 'Dhamek Stupa & Buddhist Museum', 'Isco Museum', 'Evening: Ghat walk'],
-                temple: 'Sankat Mochan Temple + Sarnath',
-                hotel: 'BrijRama Palace, Varanasi',
-                tip: 'Sarnath is where Buddha gave his first sermon – historically significant.',
-            },
-            {
-                day: 4,
-                title: 'Last Ghat Experience & Departure',
-                activities: ['Final sunrise boat ride', 'Hot chai on the ghats', 'Shopping at Vishwanath Gali', 'Check-out and departure'],
-                temple: 'Tulsi Ghat – Final prayers',
-                hotel: 'Check-out',
-                tip: 'Buy silk sarees and Banarasi artifacts as souvenirs.',
-            },
-        ],
-        hotels: ['BrijRama Palace (₹4,500/night)', 'Taj Ganges (₹8,000/night)', 'Hotel Surya (₹2,000/night)'],
-        transport: 'Private AC Car (all transfers included)',
-        highlights: ['Ganga Aarti ceremony', 'Sunrise boat ride', 'Kashi Vishwanath darshan', 'Sarnath'],
-    },
+
 };
 
 function generateItinerary(destination: string, days: number, budget: string, style: string): GeneratedItinerary {

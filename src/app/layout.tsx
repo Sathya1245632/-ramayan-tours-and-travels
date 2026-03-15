@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
     title: 'Ramayan Tours and Travels – Best Travels in Rameshwaram | AI Pilgrimage',
-    description: 'Experience the best pilgrimage tours in Rameshwaram. AI-powered planning for Ramanathaswamy Temple, Varanasi & more. Trusted #1 travel agency in Rameshwaram.',
+    description: 'Experience the best pilgrimage tours in Rameshwaram. AI-powered planning for Ramanathaswamy Temple, Tirupati & more. Trusted #1 travel agency in Rameshwaram.',
     keywords: 'best travels in rameshwaram, rameshwaram temple tour packages, rameshwaram taxi service, local tours rameshwaram, pilgrimage tour india, rameshwaram travel agency',
     openGraph: {
         title: 'Ramayan Tours and Travels – #1 Travel Agency in Rameshwaram',

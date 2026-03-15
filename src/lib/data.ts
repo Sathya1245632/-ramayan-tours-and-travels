@@ -440,7 +440,7 @@ export const destinations = [
         id: 'mysore',
         name: 'Mysore',
         state: 'South India',
-        image: '/images/madurai.jpg',
+        image: '/images/mysore.png',
         description: 'Explore the divine beauty and rich heritage of Mysore.',
         rating: 4.8,
         reviews: Math.floor(Math.random() * 5000) + 1000,

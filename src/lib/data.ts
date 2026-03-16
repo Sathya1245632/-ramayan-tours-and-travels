@@ -125,7 +125,7 @@ export const destinations = [
         id: 'pondicherry',
         name: 'Pondicherry',
         state: 'South India',
-        image: '/images/rameshwaram-hero.jpg',
+        image: '/images/pondicherry.png',
         description: 'Explore the divine beauty and rich heritage of Pondicherry.',
         rating: 4.8,
         reviews: Math.floor(Math.random() * 5000) + 1000,

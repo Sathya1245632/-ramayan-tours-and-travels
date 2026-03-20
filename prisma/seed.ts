@@ -34,8 +34,8 @@ async function main() {
         state: dest.state,
         description: dest.description,
         image: dest.image,
-        temples: dest.temples?.length || 0,
-        rating: dest.rating || 4.5,
+        temples: (dest as any).temples?.length || 0,
+        rating: (dest as any).rating || 4.5,
         category: dest.category || 'Spiritual',
         featured: false,
       },
@@ -45,7 +45,7 @@ async function main() {
   console.log('✅ Created destinations');
 
   // Create packages
-  for (const pkg of packages) {
+  for (const pkg of (packages as any[])) {
     await prisma.package.create({
       data: {
         name: pkg.name,
@@ -54,8 +54,8 @@ async function main() {
         hotelType: pkg.hotelType || 'Standard',
         highlights: pkg.highlights || [],
         includes: pkg.inclusions || [],
-        rating: pkg.rating || 4.5,
-        reviews: pkg.reviews || 0,
+        rating: (pkg as any).rating || 4.5,
+        reviews: (pkg as any).reviews || 0,
         featured: false,
         destinationId: null,
       },
@@ -70,9 +70,9 @@ async function main() {
       data: {
         name: review.name,
         location: review.location,
-        rating: review.rating,
+        rating: (review as any).rating || 5,
         comment: review.review,
-        packageName: review.package,
+        packageName: (review as any).package,
         approved: true,
       },
     });

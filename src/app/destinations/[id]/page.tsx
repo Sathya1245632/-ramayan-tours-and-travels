@@ -10,7 +10,7 @@ export default function DestinationDetailPage({ params }: { params: { id: string
     const dest = destinations.find((d) => d.id === params.id);
     if (!dest) notFound();
 
-    const relatedPackages = packages.filter((p) => p.destination === dest.name || p.destination === 'Multi-destination');
+    const relatedPackages = (packages as any[]).filter((p) => p.destination === dest.name || p.destination === 'Multi-destination');
 
     return (
         <div className="min-h-screen bg-gray-950 pt-20">

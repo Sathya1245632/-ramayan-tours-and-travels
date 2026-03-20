@@ -53,7 +53,7 @@ export default function ContactPage() {
                                 {[
                                     { icon: Phone, title: 'Phone', lines: ['+91 7639 661 626'], color: 'text-green-400' },
                                     { icon: Mail, title: 'Email', lines: ['Ramayantoursandtravels@gmail.com'], color: 'text-blue-400' },
-                                    { icon: MapPin, title: 'Address', lines: ['123, Anna Salai, Chennai', 'Tamil Nadu – 600002, India'], color: 'text-orange-400' },
+                                    { icon: MapPin, title: 'Address', lines: ['Middle Street, Near Main Temple', 'West Gate, Rameshwaram – 623526'], color: 'text-orange-400' },
                                     { icon: Clock, title: 'Working Hours', lines: ['Mon – Sat: 9 AM – 8 PM', 'Sunday: 10 AM – 4 PM'], color: 'text-yellow-400' },
                                 ].map(({ icon: Icon, title, lines, color }) => (
                                     <div key={title} className="flex items-start gap-4">
@@ -67,7 +67,7 @@ export default function ContactPage() {
                                             ))}
                                         </div>
                                     </div>
-                                ))}
+                                ))} 
                             </div>
                         </div>
 

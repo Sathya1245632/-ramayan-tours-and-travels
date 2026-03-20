@@ -43,7 +43,7 @@ export default function BlogPage() {
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             placeholder="Search articles..."
-                            className="input-sacred pl-12"
+                            className="input-sacred !pl-14"
                         />
                     </div>
                     <div className="flex gap-2">

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 import { CheckCircle, CreditCard, ArrowRight, Shield, Star, Phone } from 'lucide-react';
-import { packages } from '@/lib/data';
+import { packages, taxiPackages } from '@/lib/data';
 import toast from 'react-hot-toast';
 import { createBooking } from '@/app/actions/booking';
 
@@ -13,8 +13,27 @@ const steps = ['Select Package', 'Traveler Details', 'Payment', 'Confirmation'];
 
 function BookingContent() {
     const searchParams = useSearchParams();
-    const packageId = searchParams.get('package') || 'rameshwaram-3d';
-    const pkg = packages.find((p) => p.id === packageId) || packages[0];
+    const packageId = searchParams.get('package');
+    const type = searchParams.get('type') || 'tour';
+    
+    // Look for package in the appropriate collection
+    const allPkgs = type === 'taxi' ? taxiPackages : packages;
+    let pkg = allPkgs.find((p) => p.id === packageId);
+    
+    // Fallback if not found
+    if (!pkg) {
+        pkg = taxiPackages[0]; // Default to first taxi package since tour packages are empty
+    }
+
+    // Parse price - taxi prices might be strings like "₹3,200" or "Call for Price"
+    const parsePrice = (priceStr: any) => {
+        if (typeof priceStr === 'number') return priceStr;
+        if (!priceStr || priceStr === 'Call for Price') return 0;
+        return parseInt(priceStr.replace(/[^0-9]/g, '')) || 0;
+    };
+
+    const pkgPrice = parsePrice(pkg.price);
+    const originalPrice = (pkg as any).originalPrice ? parsePrice((pkg as any).originalPrice) : pkgPrice * 1.2;
 
     const [currentStep, setCurrentStep] = useState(1);
     const [travelers, setTravelers] = useState(2);
@@ -30,7 +49,7 @@ function BookingContent() {
     const [paymentDetails, setPaymentDetails] = useState({ upiId: '', cardNumber: '', cardName: '', expiry: '', cvv: '' });
     const [isProcessing, setIsProcessing] = useState(false);
 
-    const totalAmount = pkg.price * travelers;
+    const totalAmount = pkgPrice * travelers;
 
     const handleSubmitDetails = (e: React.FormEvent) => {
         e.preventDefault();
@@ -47,7 +66,7 @@ function BookingContent() {
 
         try {
             const result = await createBooking({
-                pkgId: pkg.id,
+                pkgId: (pkg as any).id,
                 travelers,
                 formData,
                 totalAmount
@@ -114,10 +133,13 @@ function BookingContent() {
                                         <div>
                                             <h2 className="text-white font-bold text-xl font-poppins">{pkg.name}</h2>
                                             <div className="flex items-center gap-2 text-gray-400 text-sm mt-1">
-                                                <span>{pkg.duration}</span> • <span>{pkg.hotelType}</span> • <span>{pkg.transport}</span>
+                                                <span>{pkg.duration}</span>
+                                                { (pkg as any).hotelType && <span> • {(pkg as any).hotelType}</span> }
+                                                { (pkg as any).transport && <span> • {(pkg as any).transport}</span> }
+                                                { (pkg as any).pickup && <span> • Pickup: {(pkg as any).pickup}</span> }
                                             </div>
                                         </div>
-                                        <span className="badge-saffron">{pkg.category}</span>
+                                        { (pkg as any).category && <span className="badge-saffron">{(pkg as any).category}</span> }
                                     </div>
 
                                     <div className="mb-6">
@@ -136,12 +158,17 @@ function BookingContent() {
                                     </div>
 
                                     <div className="space-y-2 mb-6">
-                                        {pkg.inclusions.map((inc) => (
+                                        { (pkg as any).inclusions ? (pkg as any).inclusions.map((inc: string) => (
                                             <div key={inc} className="flex items-center gap-2 text-gray-300 text-sm">
                                                 <CheckCircle className="w-4 h-4 text-orange-400 shrink-0" />
                                                 <span>{inc}</span>
                                             </div>
-                                        ))}
+                                        )) : (
+                                            <div className="flex items-center gap-2 text-gray-300 text-sm">
+                                                <CheckCircle className="w-4 h-4 text-orange-400 shrink-0" />
+                                                <span>Standard Transport Service</span>
+                                            </div>
+                                        )}
                                     </div>
 
                                     <button
@@ -342,7 +369,7 @@ function BookingContent() {
                                 </div>
                                 <h2 className="text-3xl font-black text-white mb-2">🎉 Booking Confirmed!</h2>
                                 <p className="text-gray-400 mb-6">
-                                    Jai Shri Ram! Your pilgrimage to <span className="text-orange-400 font-semibold">{pkg.destination}</span> is confirmed!
+                                    Jai Shri Ram! Your pilgrimage to <span className="text-orange-400 font-semibold">{(pkg as any).destination || (pkg as any).pickup || 'your destination'}</span> is confirmed!
                                 </p>
 
                                 <div className="bg-gray-800 rounded-xl p-6 mb-6 text-left space-y-3">
@@ -396,12 +423,12 @@ function BookingContent() {
                                 <div className="absolute inset-0 bg-gradient-to-t from-gray-900/60 to-transparent" />
                             </div>
                             <div className="text-white font-semibold mb-1">{pkg.name}</div>
-                            <div className="text-orange-400 text-sm mb-4">{pkg.duration} • {pkg.hotelType}</div>
+                            <div className="text-orange-400 text-sm mb-4">{pkg.duration} { (pkg as any).hotelType && ` • ${(pkg as any).hotelType}` }</div>
 
                             <div className="space-y-2 text-sm border-t border-white/5 pt-4">
                                 <div className="flex justify-between text-gray-400">
                                     <span>Package price</span>
-                                    <span>₹{pkg.price.toLocaleString()}</span>
+                                    <span>₹{pkgPrice.toLocaleString()}</span>
                                 </div>
                                 <div className="flex justify-between text-gray-400">
                                     <span>Travelers</span>
@@ -418,7 +445,7 @@ function BookingContent() {
                             </div>
 
                             <div className="mt-4 p-3 bg-orange-500/5 border border-orange-500/20 rounded-xl text-xs text-gray-400">
-                                💰 You save ₹{((pkg.originalPrice - pkg.price) * travelers).toLocaleString()} vs original price
+                                💰 You save ₹{((originalPrice - pkgPrice) * travelers).toLocaleString()} vs original price
                             </div>
 
                             <div className="mt-4 flex items-center gap-2 text-green-400 text-xs">

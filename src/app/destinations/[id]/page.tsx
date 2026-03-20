@@ -26,11 +26,7 @@ export default function DestinationDetailPage({ params }: { params: { id: string
                             <MapPin className="w-4 h-4 text-orange-400" />
                             <span>{dest.state}, India</span>
                         </div>
-                        <div className="flex items-center gap-1">
-                            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                            <span className="font-semibold">{dest.rating}</span>
-                            <span className="text-gray-400">({dest.reviews.toLocaleString()} reviews)</span>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -95,10 +91,7 @@ export default function DestinationDetailPage({ params }: { params: { id: string
                         <div className="bg-gray-900 rounded-2xl p-6 border border-white/5 sticky top-24">
                             <h3 className="text-white font-bold text-lg mb-4">Quick Info</h3>
                             <div className="space-y-3 text-sm">
-                                <div className="flex justify-between text-gray-400 py-2 border-b border-white/5">
-                                    <span>Best Time</span>
-                                    <span className="text-white">{dest.bestTime}</span>
-                                </div>
+
                                 <div className="flex justify-between text-gray-400 py-2 border-b border-white/5">
                                     <span>Duration</span>
                                     <span className="text-white">{dest.duration}</span>

@@ -79,7 +79,7 @@ export default function Navbar() {
                     <div className="hidden lg:flex items-center gap-3">
                         <a
                             href="tel:+917639661626"
-                            className="flex items-center gap-2 text-sm text-orange-400 hover:text-orange-300 transition-colors"
+                            className="flex items-center gap-2 text-sm text-orange-400 hover:text-orange-300 transition-colors whitespace-nowrap shrink-0"
                         >
                             <Phone className="w-4 h-4" />
                             <span>+91 7639 661 626</span>

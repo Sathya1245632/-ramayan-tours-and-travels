@@ -35,13 +35,13 @@ export default function Footer() {
                         </p>
                         <div className="flex gap-3">
                             {[
-                                { icon: Instagram, href: '#', color: 'hover:text-pink-400' },
-                                { icon: Facebook, href: '#', color: 'hover:text-blue-400' },
-                                { icon: Youtube, href: '#', color: 'hover:text-red-400' },
-                                { icon: Twitter, href: '#', color: 'hover:text-sky-400' },
-                            ].map(({ icon: Icon, href, color }) => (
+                                { icon: Instagram, href: '#', color: 'hover:text-pink-400', label: 'Instagram' },
+                                { icon: Facebook, href: '#', color: 'hover:text-blue-400', label: 'Facebook' },
+                                { icon: Youtube, href: '#', color: 'hover:text-red-400', label: 'Youtube' },
+                                { icon: Twitter, href: '#', color: 'hover:text-sky-400', label: 'Twitter' },
+                            ].map(({ icon: Icon, href, color, label }) => (
                                 <a
-                                    key={href}
+                                    key={label}
                                     href={href}
                                     className={`w-9 h-9 rounded-full bg-white/5 flex items-center justify-center text-gray-400 ${color} border border-white/10 hover:border-orange-500/30 transition-all hover:bg-white/10`}
                                 >
@@ -129,8 +129,8 @@ export default function Footer() {
                             <li className="flex items-start gap-3">
                                 <MapPin className="w-4 h-4 text-orange-400 mt-0.5 shrink-0" />
                                 <div>
-                                    <div className="text-white text-sm">Chennai, Tamil Nadu, India</div>
-                                    <div className="text-gray-400 text-xs">Headquarters</div>
+                                    <div className="text-white text-sm">Middle Street, Near Main Temple West Gate</div>
+                                    <div className="text-gray-400 text-xs">Rameshwaram – 623526</div>
                                 </div>
                             </li>
                         </ul>

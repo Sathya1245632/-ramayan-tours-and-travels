@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { Search, Star, MapPin, Clock, ArrowRight, Filter } from 'lucide-react';
 import { destinations } from '@/lib/data';
 
-const categories = ['All', 'Divine', 'Heritage', 'Spiritual'];
+const categories = ['All', 'Divine', 'Heritage', 'Spiritual', 'Nature'];
 
 export default function DestinationsPage() {
     const [search, setSearch] = useState('');
@@ -39,13 +39,13 @@ export default function DestinationsPage() {
                 <div className="flex flex-col sm:flex-row gap-4 items-center">
                     <div className="relative flex-1 w-full">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-orange-400" />
-                        <input
-                            type="text"
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            placeholder="Search destinations or states..."
-                            className="input-sacred pl-12"
-                        />
+                            <input
+                                type="text"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                placeholder="Search destinations or states..."
+                                className="input-sacred !pl-14"
+                            />
                     </div>
                     <div className="flex gap-2 flex-wrap justify-center">
                         {categories.map((cat) => (
@@ -90,10 +90,7 @@ export default function DestinationsPage() {
                                     <div className="absolute top-3 left-3">
                                         <span className="badge-saffron text-xs">{dest.category}</span>
                                     </div>
-                                    <div className="absolute bottom-3 right-3 flex items-center gap-1 bg-black/60 backdrop-blur-sm px-2 py-1 rounded-full">
-                                        <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                                        <span className="text-white text-xs font-semibold">{dest.rating}</span>
-                                    </div>
+
                                 </div>
 
                                 <div className="p-6">
@@ -115,12 +112,7 @@ export default function DestinationsPage() {
                                     </div>
 
                                     <div className="flex items-center justify-between pt-4 border-t border-white/5">
-                                        <div>
-                                            <div className="text-gray-500 text-xs flex items-center gap-1">
-                                                <Clock className="w-3 h-3" /> {dest.bestTime}
-                                            </div>
-
-                                        </div>
+                                        <div />
                                         <span className="flex items-center gap-1 text-orange-400 text-sm group-hover:gap-2 transition-all">
                                             Explore <ArrowRight className="w-4 h-4" />
                                         </span>
